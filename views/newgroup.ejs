@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%>
+
+        <div class="intro">
+            <h1> New Group</h1>
+            <p> You are the group admin</p>
+        </div>
+        <br>
+
+        <form action="/groups/new" method="POST">
+
+            <div class="group-data">
+                <label for="name">Group name:</label>
+                <input type="text" name="name" required value="<%= group.name %>">
+                <div class="group-code">
+                    <h4>Code to join the group is: </h4>
+                    <h2><%= code %></h2>
+                </div>
+                <input type="hidden" name="code" value="<%= code %>">
+            </div>
+            <%- include('./partials/errorMessage.ejs')  %> 
+
+            <div class="finish-test">
+                <button class="w3-button w3-hover-aqua w3-blue w3-text-indigo w3-rounder w3-xlarge"><b>Create</b></button>
+            </div>
+
+        </form>
+        
+
+        <script src=""></script>
+    </body>
+</html>

@@ -1,0 +1,585 @@
+html, body{
+    min-height: 100%;
+    
+}
+body{
+    background-color: rgb(175, 190, 221);
+    background: linear-gradient(to bottom, rgb(195, 206, 226), white);
+}
+#text1{
+    color: darkblue;
+    font-size: 100px;
+    margin: 0 auto;
+}
+
+.container1{
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+}
+.user-form{
+    width: max-content;
+    margin: 10px auto 30px;
+}
+.user-field{
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.user-field label{
+    padding-right: 5px;
+}
+.buttons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.button1{ 
+    color: rgb(173, 54, 54);
+    background-color: dodgerblue;
+    padding: 8px;
+    font-size: 24px;
+    border: none;
+}
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+.dropdown-items{
+    position: absolute;
+    display: none;
+    width: max-content;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.dropdown-items a{
+    display: block;
+}
+.dropdown-items #joingroup{
+   cursor: pointer;
+}
+.dropdown-form{
+    display: none;
+    background-color: rgb(134, 165, 255);
+}
+.dropdown-items a:hover{
+    background-color: rgb(134, 165, 255);
+}
+.dropdown:hover .dropdown-items{
+    display: block;
+}
+.dropdown:hover .dropdown-btn{
+    background-color: rgba(179, 198, 255, 0.849);
+}
+
+a{
+    text-decoration: none;
+}
+
+hr.header{
+    border-top: 3px solid  rgb(173, 54, 54);
+}
+
+
+
+
+.error-msg{
+    color: rgb(173, 54, 54);
+    font-weight: bold;
+}
+.intro{
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+.intro3{ /*za new test name input*/
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+.questions-main{
+    margin-top: 40px;
+}
+
+
+/*.questions-form{
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}*/
+
+.question{
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.question-label{
+    width: 10%;
+}
+
+.question-text{
+    width: 65%;
+    resize: none;
+}
+
+.question-types{
+    width: 25%;
+}
+
+.question-scoring{
+    position: relative;
+    width: 25%;
+    margin-top: 5px;
+    min-height: 100px;
+}
+.question-scoring2{
+    position: relative;
+    margin-left: 75%;
+    width: 25%;
+    margin-top: 5px;
+    min-height: 100px;
+}
+.question-points{
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.question-deleting{
+    margin: 5px 0 20px 10%;
+    width: 65%;
+    justify-content: center;
+}
+
+.removeQ-btn, .delete-button{
+    background-color: rgb(173, 54, 54);
+    color:  rgb(175, 190, 221);
+    padding: 5px 2px;
+    border-radius: 5px;
+}
+.assign-button, .copy-button, .login-button{
+    background-color: rgb(179, 198, 255);
+    color:  rgb(14, 33, 68);
+    padding: 5px 2px;
+    border-radius: 5px;
+}
+.assign-button:hover, .copy-button:hover, .login-button:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+.removeQ-btn:hover, .delete-button:hover{
+    color: floralwhite;
+    cursor: pointer;
+}
+.register-link{
+    color:  rgb(14, 33, 68);
+}
+.register-link:hover{
+    font-weight: bold;
+}
+
+.questions-add{
+    position: relative;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.existing-questions{
+    max-height: 300px;
+    overflow-y: scroll;
+    margin: 0 auto;
+    width: 80%;
+    display: none;
+}
+
+.existing-question{
+    display: none;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.view-existing-question-btn{
+    margin-right: 10%;
+}
+
+.added-questions{
+    width: 80%;
+    margin: 0 auto;
+    display: none; /*postaje flex kad se klikne checkbox*/
+    flex-wrap: wrap;
+    border: 2px solid blue; 
+    margin-bottom: 20px;
+}
+
+.added-question{
+    padding: 5px;
+    margin: 5px;
+    background-color: rgb(190, 195, 197);
+    border-radius: 10px;
+}
+.added-question p{
+    margin: 0;
+    color: darkblue;
+}
+
+.text-add-question{
+    color: darkblue;
+    font-weight: bold;
+    margin: 0;
+    font-size: 24px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.finish-test{
+    margin: 50px 0;
+    display: flex;
+    justify-content: space-around;
+}
+.finish-test2{/*u do test i samo ima veci margin zbog fixed tajmera*/
+    margin: 50px 0 120px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.answers, .settings{
+    position: relative;
+    width: 65%;
+    margin-top: 5px;
+    margin-left: 10%;
+    border: 2px solid blue;   
+}
+.settings{
+    padding: 20px;
+    margin-top: 10px;
+   /* display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;*/
+}
+
+.answers-type1{
+    padding-bottom: 80px; 
+}
+
+.answer-option{
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.T-F-letters1{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding-right: 84%;
+}
+.T-F-letters1 p{
+    margin: 0;
+}
+.T-F-letters2{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding-right: 77%;
+}
+.T-F-letters2 p{
+    margin: 0;
+}
+
+.button3{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.button4{
+    height: 40px;
+    width: 40px;
+    margin: 10px 0;
+    border-radius: 50%;
+    background-color: rgb(173, 54, 54);
+    color:  rgb(175, 190, 221);
+}
+.button4:hover{
+    cursor: pointer;
+    color: floralwhite;
+}
+
+.text-add-option, .text-check,  .text-add-statement, .text-check-tf{
+    color: darkblue;
+    font-size: 16px;
+    position: absolute;
+    left: 60px;
+    bottom: 0px;
+}
+
+.text-correct-variations{
+    color: darkblue;
+    font-size: 14px;
+}
+
+.text-check,  .text-check-tf{
+    bottom: 30px;
+    font-size: 14px;
+}
+
+
+.check-correct1{
+    margin-top: 20px;
+    /*-webkit-transform: scale(1.5);*/
+    transform: scale(1.5);
+}
+.square{
+    display: block;
+}
+
+.textarea1{
+    width: 70%;
+    margin: 5px 0;
+    resize: vertical;
+    min-height: 30px;
+}
+
+a.link-testpage{
+    background-color: rgb(190, 195, 197);
+    color: darkblue;
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+a.link-testpage:first-of-type{
+    margin-left: 10px;
+}
+
+
+
+
+.student-data, .group-data{
+    display: flex;
+    flex-direction: column;
+    width: 42%;
+    margin: 0 auto 50px;
+}
+
+
+.members, .questions{
+    margin: 0 5%;
+}
+.members-new, .question-answers{
+    margin: 20px 5%;
+    display: inline-block;
+}
+.assigned-tests{
+    margin: 20px 5%;
+}
+
+
+/*ASSIGN TEST*/
+.questions-main2{
+    width: 65%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.answers2{
+    margin-left: 20px;
+}
+.answer-option2 p{
+    margin: 10px;
+    display: inline-block;
+}
+.settings2{
+    position: relative;
+    width: 70%;
+    margin: 20px auto;
+    border: 2px solid blue;
+    padding: 0 20px 20px 20px;
+    text-align: center;
+}
+.settings-field, .assign-group, .assign-link{
+    margin: 15px auto;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.assign-group, .assign-link{/*prvo je none dok se ne klikne dugme*/
+    display: none;
+}
+.assign-group p{
+    margin:0;
+    display: inline-block;
+}
+.assign-test{
+    margin-top: 20px;
+}
+.group{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.members2{
+    width: 100%;
+    display: none;/*prvo je none dok se ne klikne dugme*/
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.group:first-of-type{
+    margin-top: 0;
+}
+.check-correct2{
+    margin-top: 5px;
+    transform: scale(1.5);
+}
+.intro2{
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+.whitelist-email{
+    width: 100%;
+    padding: 15px 15%;
+    display: none;/*kad se chekira onda flex*/
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.whitelist-email input{
+    height: 28px;
+}
+.add-email{
+    width: 100%;
+    padding: 0 15%;
+    display: none;/*kad se chekira inline-block*/
+}
+.add-email p{
+    margin: 0;
+}
+
+
+
+
+#copy-input{
+    width: 500px;
+}
+
+
+/*all tests page*/
+.tests-full{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.tests-half{
+    width: 45%;
+}
+/*all groups page*/
+.groups-full{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.groups-half{
+    width: 45%;
+}
+
+
+.test-intro{
+    margin: 10px 10%;
+}
+.test-copylink{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+.test-copylink input{
+    height: 28px;
+}
+.responses{
+    margin: 20px 15% 0 15%;
+}
+
+
+.textarea-correct{
+    background-color: rgba(52, 192, 76, 0.658);
+}
+.textarea-wrong1{
+    background-color: rgba(240, 66, 66, 0.74);
+}
+.textarea-wrong2{
+    background-color: rgba(253, 118, 40, 0.644);
+}
+
+
+
+.timer-div{
+    padding: 10px 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 20px;
+    z-index: 3;
+    background-color: rgba(179, 198, 255, 0.918);
+}
+.timer-start{
+    width: 15%;
+}
+.timer-mid{
+    width: 65%;
+}
+.timer-end{
+    width: 15%;
+}
+
+.progress-bar {
+    width: 100%;
+    border: solid 1px #000;
+  }
+  .progress-bar .progress {
+    height: 20px;
+    animation: progressbar-countdown;
+
+    animation-iteration-count: 1; /*kad se napuni stane animacija*/
+
+    animation-fill-mode:forwards ;
+
+    animation-play-state: paused; /*pauzirano dok ne pokrene js kad dodeli duration i delay*/
+
+    animation-timing-function: linear;
+  }
+  @keyframes progressbar-countdown {
+    0% {
+      width: 0%;
+      background: rgba(3, 107, 3, 0.938);
+    }
+    100% {
+      width: 100%;
+      background: rgb(101, 255, 11);
+    }
+  }

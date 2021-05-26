@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%>     
+        
+        <div class="intro">
+            <h2><%= test.name %> </h2> 
+        </div>
+        <%- include('./partials/errorMessage.ejs')%> 
+        <% if(status == 2){ %> 
+
+            <input type="hidden" name="startsAt" id="startsAt" value="<%= startsAt %>">
+            <input type="hidden" name="endsAt" id="endsAt" value="<%= endsAt %>">
+            <% if(endsAt){  %>
+                <div class="timer-div">
+                    <div class="timer-start">
+                        <!--dodacemo vrednost kroz javaskript-->
+                    </div>
+                    <div class="timer-mid">
+                        <div class="progress-bar">
+                            <div class="progress"></div><!-- samo preko css animacija od diva pravimo progrees bar koji odbrojava dokle traje test-->
+                        </div>
+                    </div>
+                    <div class="timer-end">
+                        <!--dodacemo vrednost kroz javaskript-->
+                    </div>
+                </div>
+            <% } %> 
+
+            <div class="questions-main">
+                <form class="questions-form" action="" method="POST">
+                    <% if(link){ %> 
+                        <div class="student-data">
+                            <% if(emails.length == 0){%>
+                            <label for="student_email">Email</label>
+                            <input type="email" name="student_email" placeholder="Enter your email" required>
+                            <% } else {%>
+                                <label for="student_email">Email</label>
+                                <select name="student_email" placeholder="Enter your email" required>
+                                <% for(let i=0 ; i<emails.length ; i++){ %>
+                                    <option value="<%= emails[i] %>"><%= emails[i] %></option>
+                                <% } %> 
+                                </select> 
+                            <% } %> 
+                            <label for="student_name">Name</label>
+                            <input type="text" name="student_name" placeholder="Enter your name" required>
+                        </div>
+                    <% } %> 
+                    <%- include('./partials/test.ejs') %>       
+
+                    <div class="finish-test2">
+                        <button class="w3-button w3-hover-aqua w3-blue w3-text-indigo w3-rounder w3-xlarge" id="submit"><b>Finish</b></button>
+                    </div>  
+                </form>
+            </div> 
+        <% } else if(status == 1){ %>
+            <h4>The test has finished</h4>
+        <% } else{ %>  
+            <h4>The test has not started yet. It starts at: <%= startsAt %></h4>
+        <% } %> 
+        <script src="/public/main.js"></script>
+        <script src="/public/timebar.js"></script>
+    </body>
+</html>

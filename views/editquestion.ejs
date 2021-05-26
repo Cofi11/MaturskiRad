@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+    <body>
+        <%- include('./partials/header.ejs')%>
+
+        <div class="intro">
+            <h1> Question Editing</h1>
+            <p>Edit your question below </p>
+        </div>
+        <br>
+
+        <form class="questions-form" method="POST" action="/questions/<%= question.id  %>?_method=PUT">
+            <div class="question" id="question1">
+                <label for="question-text" class="question-label" id="question-label1">Question </label>
+                <textarea class="question-text" id="question-text1" name="question_text" placeholder="Question text" required><%= question.questionText %> </textarea>
+
+                <div class="question-types">    
+                    <label for="type-of-question">Question type:</label> 
+                    <select name="type_of_question" class="question-type-select" id="question-type-select1">
+                        <option value="choose-answer" <%=(question.questionType=='choose-answer')? 'selected':'' %> >Choose correct answer</option>
+                        <option value="type-answer" <%=(question.questionType=='type-answer')? 'selected':'' %> >Type correct answer</option>
+                        <option value="true-false" <%=(question.questionType=='true-false')? 'selected':'' %> >True or false</option>
+                    </select>
+                </div>
+
+                <div class="answers <%=(question.questionType=='choose-answer' || question.questionType=='true-false')?'answers-type1':'' %> " id="answers-question1">
+                    <% if(question.questionType == 'choose-answer'){ %> 
+                        <button class="w3-button w3-circle w3-blue button3" id="addOption1" type="button">+</button>
+                        <p class="text-add-option">Click to add new options/answers</p>
+                        <p class="text-check">Check the correct answer (you can check more than 1 option)</p>
+
+                        <% for(let i=0 ; i<question.answersText.length ; i++){ %> 
+                            <div class="answer-option">
+                                <input type="checkbox" name="answercheck1" value="1"  class="check-correct1" id="answercheck<%= i+1 %> " <%= ((question.correct[i]==1)? 'checked':'') %> >
+                                <input name="answercheck1" type="hidden" value="0">
+                                <textarea placeholder="Enter option/answer" class="textarea1" required id="answer-text<%= i+1 %> " name="answer_text_Q1"><%= question.answersText[i] %> </textarea>
+                                <button class="button4" type="button">-</button>
+                            </div>
+                        <% } %> 
+                    <% } else if(question.questionType == 'type-answer') { %> 
+                        <textarea placeholder="Enter correct answer" class="textarea1" required id="correctanswer1" name="correctanswer1"><%= question.answersText %> </textarea>
+                        <p class="text-correct-variations">You can add multiple possible corect answers/variatons separated by ;<br>Example: color;colour means both are correct answers</p>
+                    <% } else if(question.questionType == 'true-false'){ %> 
+                        <button class="w3-button w3-circle w3-blue button3" id="addStatement1" type="button">+</button>
+                        <p class="text-add-statement">Click to add new statement</p>
+                        <p class="text-check-tf">For each statement check TRUE (T) or FALSE (F)</p>
+
+                        <% for(let i=0 ; i<question.answersText.length ; i++){ %> 
+                            <div class="answer-option">
+                                <input type="radio" name="check_tf1_<%= i+1 %>" class="check-correct1" required id="check-true<%= i+1 %>" value="true" data-num=<%= i+1 %> <%= (question.correct[i] == 1)? 'checked':'' %> >
+                                <input type="radio" name="check_tf1_<%= i+1 %>" class="check-correct1" required id="check-false<%= i+1 %>" value="false" data-num=<%= i+1 %> <%= (question.correct[i] == 0)? 'checked':'' %> >
+                                <textarea placeholder="Enter statement" class="textarea1" required id="statement-text<%= i+1 %>" name="statement_text_Q1"><%= question.answersText[i] %></textarea>
+                                <button class="button4" type="button">-</button>
+                            </div>
+                        <% } %> 
+                    <% } %> 
+                </div>
+
+                <div class="question-scoring" id="question-scoring1">
+                    <div class="question-points" id="question-points1">
+                        <label>Enter maximum points for this question</label>
+                        <input type="number" placeholder="Points" name="question_maxpoints" id="question-maxpoints1" required value=<%= question.maxPoints %> step="any" min="0">
+                    </div>
+                </div>
+
+            </div>
+
+            <%- include('./partials/errorMessage.ejs')  %> 
+
+            <div class="finish-test">
+                <button class="w3-button w3-hover-aqua w3-blue w3-text-indigo w3-rounder w3-xlarge"><b>Edit</b></button>
+            </div>
+            <a href="/questions">Cancel</a>
+
+        </form>
+        
+
+        <script src="/public/main.js"></script>
+    </body>
+</html>

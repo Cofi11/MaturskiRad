@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%> 
+        <div class="intro">
+            <div>
+                <h2><%= test.name %> </h2> 
+            </div>
+            <div>
+                <p>This is a preview of the test. Test-takers will see the test like this when it is assigned to them</p>
+            </div>
+        </div>
+        
+        <%- include('./partials/test.ejs') %> 
+
+        <div class="finish-test">
+            <a href="/tests/<%= test.id %>/edit">Edit</a>
+            <button class="delete-button" data-id="<%= test.id %> ">Delete</button>
+            <a href="/tests">Tests list</a>
+        </div>
+
+        <script src="/public/main.js"></script>
+        <script src="/public/delete.js"></script>
+    </body>
+</html>

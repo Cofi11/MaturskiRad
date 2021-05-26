@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%>     
+        
+        <div class="intro">
+            <h2> Test results: <%= testname %> </h2> 
+        </div>
+        <div class="student-data">
+            <label for="name">Name</label>
+            <input readonly type="text" name="name" value="<%= username %>">
+            <% if(email){ %> 
+                <label for="email">Email</label>
+                <input readonly type="email" name="email" value="<%= email %>">
+            <% } %>     
+        </div>
+        <% if(status == 2) {%>
+            <div class="test-intro">
+                <h4>Test is not finished. You will see your results once it is over</h4>
+                <% if(endsAt){ %>
+                    <h4>It ends at: <%= endsAt  %></h4>
+                <% } %> 
+            </div>
+        <% }else { %> 
+            <div class="questions-main">
+                <% let i=1 %>
+                <% let final;  %> 
+                <% if(points.length>0){ %> 
+                <%      final=true; %> 
+                <% }else { %> 
+                <%      final=false; %> 
+                <% } %>
+                <% if(final){ %> 
+                    <div class="test-intro">
+                        <h4>Teacher has reviewed your test</h4>
+                    </div>
+                <% }else { %> 
+                    <div class="test-intro">
+                        <h4>Teacher has not reviewed your test so these are unofficial results</h4>
+                    </div>
+                <% } %>  
+                <% let sumAutoPoints=0;  %>  
+                <% let sumPoints=0;  %> 
+                <% let sumMaxPoints=0;  %> 
+                <% while(questions[i-1] != null){ %> 
+                    <div class="question" id="question<%= i %>">
+                        <label for="question-text" class="question-label" id="question-label1">Question <%= i %>: </label>
+                        <textarea readonly class="question-text"><%= questions[i-1].questionText %></textarea>
+                        
+                        <div class="question-types">    
+                            <label for="type-of-question">Question type:</label> 
+                            <div name="type_of_question" class="question-type-select" id="question-type-select1">
+                                <p><%= questions[i-1].questionType %></p>
+                            </div>
+                        </div>
+                        <div class="answers" id="answers-question<%= i %>">
+                            <% let j=1; %> 
+                            <% if(questions[i-1].questionType == 'choose-answer'){ %> 
+                                <% while(questions[i-1].answersText[j-1] != null){%>
+                                    <div class="answer-option">
+                                        <input disabled type="checkbox" name="answercheck<%= i %>" class="check-correct1" value="1" id="answercheck<%= i %>_<%= j %>"  <%= ((answers[i-1].array[j-1]==1)? 'checked':'') %>>
+                                        <% if(answers[i-1].array[j-1]==1 && questions[i-1].correct[j-1] == 1){  %> 
+                                            <textarea readonly class="textarea1 textarea-correct"><%= questions[i-1].answersText[j-1] %></textarea>
+                                        <% } else if(answers[i-1].array[j-1]==1 && questions[i-1].correct[j-1]  == 0) { %> 
+                                            <textarea readonly class="textarea1 textarea-wrong1"><%= questions[i-1].answersText[j-1] %></textarea>
+                                        <% } else if(answers[i-1].array[j-1]==0 && questions[i-1].correct[j-1]  == 1) { %> 
+                                            <textarea readonly class="textarea1 textarea-wrong2"><%= questions[i-1].answersText[j-1] %></textarea>
+                                        <% } else {%>
+                                            <textarea readonly class="textarea1"><%= questions[i-1].answersText[j-1] %></textarea>
+                                        <% } %>  
+                                    </div>
+                                    <% j++; %> 
+                                <% } %>     
+                            <% } else if(questions[i-1].questionType == 'type-answer'){ %> 
+                                <% if(questions[i-1].answersText.includes(answers[i-1].string)){ %> 
+                                    <textarea readonly class="textarea1 textarea-correct"><%= answers[i-1].string %></textarea>
+                                <% } else {%>
+                                    <textarea readonly class="textarea1 textarea-wrong1"><%= answers[i-1].string %></textarea>
+                                    <p>Correct answer(s)</p>
+                                    <textarea readonly class="textarea1"><%=  questions[i-1].answersText.join('; ') %></textarea>
+                                <% } %>  
+                            <% } else if(questions[i-1].questionType == 'true-false'){%>
+                                <div class="T-F-letters2">
+                                    <p>T</p>
+                                    <p>F</p>
+                                </div>
+                                <% while(questions[i-1].answersText[j-1] != null){%>
+                                    <div class="answer-option">
+                                        <input disabled type="radio" name="check_tf<%= i %>_<%= j %>" class="check-correct1" value="true" <%= ((answers[i-1].array[j-1]==1)? 'checked':'') %>>
+                                        <input disabled type="radio" name="check_tf<%= i %>_<%= j %>" class="check-correct1" value="false" <%= ((answers[i-1].array[j-1]==0)? 'checked':'') %>>
+                                        <% if(answers[i-1].array[j-1] == questions[i-1].correct[j-1]){ %>
+                                            <textarea readonly class="textarea1 textarea-correct"><%= questions[i-1].answersText[j-1] %></textarea>
+                                        <% }else { %>
+                                            <textarea readonly class="textarea1 textarea-wrong1"><%= questions[i-1].answersText[j-1] %></textarea>  
+                                        <% } %> 
+                                    </div>
+                                    <% j++; %> 
+                                <% } %>
+                            <% } %> 
+                        </div>
+                        <div class="question-scoring" id="question-scoring<%= i %>">
+                            <div class="question-points" id="question-points<%= i %>">
+                                <% if(final){ %> 
+                                    <label>My points</label>
+                                    <input readonly type="number" value=<%= points[i-1] %>>
+                                <% }else { %> 
+                                    <label>Unofficial points</label>
+                                    <input readonly type="number" value=<%= autoPoints[i-1] %>>
+                                <% } %>     
+                                <label>Maximum Points</label>
+                                <p><%= questions[i-1].maxPoints %></p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <% sumAutoPoints += autoPoints[i-1] %> 
+                    <% sumPoints += points[i-1] %>
+                    <% sumMaxPoints += questions[i-1].maxPoints %> 
+                    <% i++; %> 
+                <% } %>
+                <div class="question-scoring2" id="question-scoring<%= i %>">
+                    <div class="question-points" id="question-points<%= i %>">
+                        <% if(final){ %> 
+                            <label>Total points</label>
+                            <input readonly type="number" value=<%= sumPoints %>>
+                        <% }else { %> 
+                            <label>Total unofficial points</label>
+                            <input readonly type="number" value=<%= sumAutoPoints %>>
+                        <% } %>     
+                        <label>Maximum Points</label>
+                        <p><%= sumMaxPoints %></p>
+                    </div>
+                </div>
+            </div>
+        <% } %> 
+    </body>
+</html>

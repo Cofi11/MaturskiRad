@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%> 
+        <div class="intro">
+            <div>
+                <h2><%= test.name %> </h2> 
+            </div>
+        </div>
+        <div class="questions-main2">
+            <% let i=1 %>
+            <% while(questions[i-1] != null){ %> 
+                <div>
+                    <div>
+                        <h3>Question <%= i %>: <%= questions[i-1].questionText %></h3>
+                        <p>Question type: <%= questions[i-1].questionType %></p>
+                    </div>
+                    <div class="answers2">
+                        <% let j=1; %> 
+                        <% while(questions[i-1].answersText[j-1] != null){%>
+                            <div class="answer-option2">
+                                <p> <%= j %>: <%= questions[i-1].answersText[j-1] %> </p>
+                                <% if(questions[i-1].questionType == 'choose-answer'){ %> 
+                                    <% if(questions[i-1].correct[j-1]==1){ %> 
+                                        <p style="color: green;">Correct</p>
+                                    <% } %> 
+                                <% }else if(questions[i-1].questionType == 'true-false'){  %> 
+                                    <% if(questions[i-1].correct[j-1]==1){ %> 
+                                        <p style="color: green;">True</p>
+                                    <% }else{ %> 
+                                        <p style="color: red;">False</p>
+                                    <% } %> 
+                                <% } %> 
+                            </div>
+
+                            <% j++; %> 
+                        <% } %>     
+                    </div>
+                </div>
+                <% i++; %> 
+            <% } %> 
+        </div>
+        <div class="settings2">
+            <h3>Settings for the test</h3>
+            <form action="/tests/<%= test.id %>/assign" method="POST" onsubmit="return preSubmit()">
+                <div class="settings-field">
+                    <label for="date_start">Test starts</label>
+                    <input type="date" name="date_start" id="date_start">
+                    <input type="time" name="time_start" id="time_start">
+                </div>
+                <div class="settings-field">
+                    <label for="date_end">Test ends</label>
+                    <input type="date" name="date_end" id="date_end">
+                    <input type="time" name="time_end" id="time_end">
+                </div>
+
+                <div class="settings-field">
+                    <label for="random">Randomize order of questions</label>
+                    <input type="checkbox" name="random" id="random">
+                </div>
+                <p>Choose how you want to assign a test</p>
+                <div class="settings-field">
+                    <button type="button" class="assign-button" id="group-btn">Assign to a group</button>
+                    <button type="button" class="assign-button" id="link-btn">Assign via link</button>
+                </div>
+                <div class="assign-group">
+                    <% i=0;  %>
+                    <% let j;  %> 
+                    <div class="intro2">
+                        <p>Pick one group to assign this test</p>
+                    </div>
+                    <% groups.forEach(group => { %>
+                        <% j=0; %> 
+                        <div class="group">
+                            <p><%= group.name %></p>
+                            <button type="button" class="members-button" data-sh=1>Show Members</button>
+                            <input type="radio" name="group" class="check-correct2" value="<%= group.code %>">
+                        </div>
+                        <div class="members2">
+                            <% while(usernames[i][j] != null){ %> 
+                                <p><%= usernames[i][j] %> </p>
+                                <br>
+                                <% j++; %> 
+                            <% } %> 
+                        </div>
+                        <% i++;  %> 
+                    <% }) %> 
+                </div>
+
+                <div class="assign-link">
+                    <label for="whitelist">Whitelist emails(Select who can take this test)</label>
+                    <input type="checkbox" name="whitelist" class="check-correct2">
+                    <div class="whitelist-email">
+                        <label class="label-email">Email 1:</label>
+                        <input type="email" name="emails" id="email1">
+                    </div>
+                    <div class="add-email">
+                        <button class="w3-button w3-circle w3-blue button2" type="button" id="addEmail">+</button>
+    
+                        <p>Add</p>
+                    </div>
+                </div>
+                
+                <div class="assign-test">
+                    <button class="w3-button w3-hover-aqua w3-blue w3-text-indigo w3-rounder w3-xlarge" id="submit"><b>Assign</b></button>
+                </div>
+            </form>
+        </div>  
+
+
+    <script src="/public/assign.js"></script>
+    </body>
+</html>

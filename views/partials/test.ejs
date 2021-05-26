@@ -1,0 +1,51 @@
+<% let i=1 %>
+<% while(questions[i-1] != null){ %> 
+    <div class="question" id="question<%= i %>">
+        <label for="question-text" class="question-label" id="question-label1">Question <%= i %>: </label>
+        <textarea readonly class="question-text"><%= questions[i-1].questionText %></textarea>
+        
+        <div class="question-types">    
+            <label for="type-of-question">Question type:</label> 
+            <div name="type_of_question" class="question-type-select" id="question-type-select1">
+                <p><%= questions[i-1].questionType %></p>
+            </div>
+        </div>
+
+        <div class="answers" id="answers-question<%= i %>">
+            <% let j=1; %> 
+            <% if(questions[i-1].questionType == 'choose-answer'){ %> 
+                <% while(questions[i-1].answersText[j-1] != null){%>
+                    <div class="answer-option">
+                        <input type="checkbox" name="answercheck<%= i %>" class="check-correct1" value="1" id="answercheck<%= i %>_<%= j %>">
+                        <input type="hidden" name="answercheck<%= i %>" value="0" id="answercheck<%= i %>_<%= j %>"> <!-- TREBA SREDITI DA SE IZBRISE HIDDEN KAD JE CEKIRANO DA NE BI BILO I 0 i 1 VEC SAMO 1-->
+                        <textarea readonly class="textarea1"><%= questions[i-1].answersText[j-1] %></textarea>
+                    </div>
+                    <% j++; %> 
+                <% } %>     
+            <% } else if(questions[i-1].questionType == 'type-answer'){ %> 
+                <textarea name="typeanswer<%= i %>"  class="textarea1" placeholder="Enter correct answer"></textarea>
+            <% } else if(questions[i-1].questionType == 'true-false'){%>
+                <div class="T-F-letters2">
+                    <p>T</p>
+                    <p>F</p>
+                </div>
+                <% while(questions[i-1].answersText[j-1] != null){%>
+                    <div class="answer-option">
+                        <input type="radio" name="check_tf<%= i %>_<%= j %>" class="check-correct1" value="true">
+                        <input type="radio" name="check_tf<%= i %>_<%= j %>" class="check-correct1" value="false">
+                        <textarea readonly class="textarea1"><%= questions[i-1].answersText[j-1] %></textarea>
+                    </div>
+                    <% j++; %> 
+                <% } %>
+            <% } %> 
+        </div>
+        <div class="question-scoring" id="question-scoring<%= i %>">
+            <div class="question-points" id="question-points<%= i %>">
+                <label>Maximum Points</label>
+                <p><%= questions[i-1].maxPoints %></p>
+            </div>
+        </div>
+        <input type="hidden" name="questionsId" value="<%= questions[i-1].id %>">
+    </div>
+    <% i++; %> 
+<% } %>

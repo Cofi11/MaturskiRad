@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%>     
+        <div class="intro">
+            <h2>My tests</h2>
+        </div>
+        <% let number=1; %>
+        <div class="tests-full">
+            <div class="tests-half">
+                <div class="intro">
+                    <h4>My created tests</h4>
+                </div>
+                <% tests.forEach(test => { %>
+                    <div>
+                        <h3> <%=number+': '+ test.name %> </h3>
+                        <a href="/tests/<%= test.id %>">Preview</a>
+                        <a href="/tests/<%= test.id %>/edit">Edit</a>
+                        <button class="delete-button" data-id="<%= test.id %>">Delete</button>
+                        <a href="/tests/<%= test.id %>/assign" class="assign-button">Assign</a>
+                    </div>
+                    <% number++; %> 
+                <% }) %> 
+            </div>
+            <div class="tests-half">
+                <div class="intro">
+                    <h4>My assigned tests</h4>
+                </div>
+                <% number=1; %>
+                <% exams.forEach(exam => { %>
+                    <div>
+                        <h3> <%=number+': '+ exam.test.name %> </h3>
+                        <a class="assign-button" href="/tests/<%= exam.id %>/exam">Exam</a>
+                    </div>
+                    <% number++; %> 
+                <% }) %> 
+            </div>
+        </div>
+
+        <%- include('./partials/errorMessage.ejs')%> 
+
+        <script src="/public/main.js"></script>
+        <script src="/public/delete.js"></script>
+    </body>
+</html>

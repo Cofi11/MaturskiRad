@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%>
+
+        <div class="intro">
+            <h1> New question</h1>
+            <p> Make your question below</p>
+        </div>
+        <br>
+
+        <form class="questions-form" action="/questions/new" method="POST">
+            <div class="question" id="question1">
+                <label for="question-text" class="question-label" id="question-label1">Question </label>
+                <textarea class="question-text" id="question-text1" name="question_text" placeholder="Question text" required></textarea>
+
+                <div class="question-types">    
+                    <label for="type-of-question">Question type:</label> 
+                    <select name="type_of_question" class="question-type-select" id="question-type-select1">
+                        <option value="choose-answer" selected>Choose correct answer</option>
+                        <option value="type-answer">Type correct answer</option>
+                        <option value="true-false">True or false</option>
+                    </select>
+                </div>
+            </div>
+
+            <%- include('./partials/errorMessage.ejs')  %> 
+
+            <div class="finish-test">
+                <button class="w3-button w3-hover-aqua w3-blue w3-text-indigo w3-rounder w3-xlarge"><b>Add</b></button>
+            </div>
+
+        </form>
+        
+
+        <script src="/public/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%> 
+        <div class="intro">
+            <h2> Question </h2> 
+        </div>
+        <div class="questions">
+            <div>
+                <h3><%= question.questionText %></h3>
+                <p>Question type: <%= question.questionType %></p>
+            </div>
+            <div class="question-answers">
+                <% let j=1; %> 
+                <% while(question.answersText[j-1] != null){%>
+                    <div class="answer-option2">
+                        <p> <%= j %>: <%= question.answersText[j-1] %> </p>
+                        <% if(question.questionType == 'choose-answer'){ %> 
+                            <% if(question.correct[j-1]==1){ %> 
+                                <p style="color: green;">Correct</p>
+                            <% } %> 
+                        <% }else if(question.questionType == 'true-false'){  %> 
+                            <% if(question.correct[j-1]==1){ %> 
+                                <p style="color: green;">True</p>
+                            <% }else{ %> 
+                                <p style="color: red;">False</p>
+                            <% } %> 
+                        <% } %>
+                    </div>
+                    <% j++; %> 
+                <% } %>     
+            </div>
+            <div>
+                <a href="/questions/<%= question.id %>/edit">Edit</a>
+                <button class="delete-button" data-id="<%= question.id %> ">Delete</button>
+                <a href="/questions">Questions list</a>
+            </div>
+        </div>
+        <hr>
+        <div class="questions">
+            <div>
+                <% if(tests[0] != null) {%> 
+                <h4>This question is used in tests:</h4>
+                <% } else{ %> <!-- mora ovako u jednom redu -->
+                <h4>This question is currently not used in any test</h4>  
+                <% } %>     
+            </div>
+            <div>
+                <% j=1; %>
+                <% while(tests[j-1] != null){%>
+                    <a class="link-testpage" href="/tests/<%= tests[j-1].id %> "><%= tests[j-1].name %> </a>
+                    <% j++; %> 
+                <% } %>
+            </div>
+        </div>
+
+
+        <script src="/public/main.js"></script>
+        <script src="/public/delete.js"></script>
+    </body>
+</html>

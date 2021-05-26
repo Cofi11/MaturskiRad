@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%> 
+        <div class="intro">
+            <h2> <%= group.name %>  </h2> 
+        </div>
+        <div class="members">
+            <h3>Group Members</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Userame</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%  admins.forEach(admin => { %>
+                        <tr>
+                            <td><%= admin.username %> </td>
+                            <td>Admin</td>
+                        </tr>
+                    <% }) %> 
+                    <%  members.forEach(member => { %>
+                        <tr>
+                            <td><%= member.username %> </td>
+                            <td>Member</td>
+                        </tr>
+                    <% }) %> 
+                </tbody>
+            </table>
+        </div>
+        <div class="members-new">
+            <p>Group code:</p>
+            <input id="copy-input" type="text" readonly value="<%= group.code %>"></input>
+            <button class="copy-button" id="copy-btn1">Copy group code</button>
+            <!--<button class="copy-button" id="copy-btn2">Copy join link</button> -->
+        </div>
+
+        <div class="assigned-tests">
+            <% let number=1; %>
+            <% let j=0 %> 
+            <% exams.forEach(exam => { %>
+                <div>
+                    <h3> <%=number+': '+ exam.test.name %> </h3>
+                    <a class="assign-button" href="/tests/<%= exam.id %>/exam">Exam</a>
+                    <% if(j<results.length && results[j].exam==exam.id){ %>
+                        <a class="assign-button" href="/tests/<%= results[j].id %>/results">My results</a>
+                        <% j++; %> 
+                    <% } %> 
+                </div>
+                <% number++; %> 
+            <% }) %> 
+        </div>
+
+        <script src="/public/delete.js"></script>
+        <script src="/public/copy.js"></script>
+    </body>
+</html>

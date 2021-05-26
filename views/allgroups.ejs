@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%> 
+
+        <div class="intro">
+            <h2>My groups</h2>
+        </div>
+        <br>
+        <div class="groups-full">
+            <div class="groups-half">
+                <div class="intro">
+                    <h4>Admin:</h4>
+                </div>
+                <% let number=1; %>
+                <% adminGroups.forEach(adminGroup => { %>
+                    <div>
+                        <h3><%=number + ': ' +adminGroup.name %></h3>
+                        <a class="assign-button" href="/groups/<%= adminGroup.id %> ">View</a>
+                    </div>
+                    <% number++; %> 
+                <% }) %> 
+            </div>
+            <div class="groups-half">
+                <div class="intro">
+                    <h4>Member:</h4>
+                </div>
+                <% number=1; %>
+                <% memberGroups.forEach(memberGroup => { %>
+                    <div>
+                        <h3><%=number + ': ' +memberGroup.name %></h3>
+                        <a class="assign-button" href="/groups/<%= memberGroup.id %> ">View</a>
+                    </div>
+                    <% number++; %> 
+                <% }) %> 
+            </div>
+        </div>
+
+        <script src="/public/delete.js"></script>
+    </body>
+</html>

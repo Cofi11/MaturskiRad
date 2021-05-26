@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Test</title>
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs')%>     
+        
+        <div class="intro">
+            <h2><%= name %> </h2> 
+            <p>You are the teacher for this test</p>
+        </div>
+        <div class="test-intro">
+            <% if(status == 2){ %> 
+                <h4>The test is currently open.</h4>
+                <% if(endsAt){ %> 
+                    <h4>It ends at: <%= endsAt %> </h4>
+                <% } %> 
+            <% } else if(status == 1){ %>
+                <h4>The test has finished</h4>
+            <% } else{ %>  
+                <h4>The test has not started yet. It starts at: <%= startsAt %></h4>
+            <% } %> 
+            <% if(link){ %>
+                <h4>Test was assigned via a link:</h4>
+                <div class="test-copylink">
+                    <input id="copy-input" type="text" readonly value="localhost:3000/tests/<%= examId %>/exam"></input>
+                    <button class="copy-button" id="copy-btn1">Copy link for the exam</button>
+                </div>
+            <% } else{ %>
+                <h4>Test was assigned to a group: <a class="assign-button" href="/groups/<%= group.id %>"><%= group.name %></a> </h4>
+            <% } %> 
+        </div>  
+        <% if(status != 0 && responses.length>0){ %> 
+            <div class="responses">
+                <h4>Responses for the test:</h4>
+                <% for(let i=0 ; i<responses.length ; i++){ %> 
+                    <% if(link) {%> 
+                        <a class="assign-button" href="/tests/<%= responses[i].id %>/results"><%= responses[i].email %></a>
+                    <% }else { %> 
+                        <a class="assign-button" href="/tests/<%= responses[i].id %>/results"><%= responses[i].user.username %></a>
+                    <% } %>     
+                <% } %>     
+            </div>
+        <% } %> 
+        <script src="/public/main.js"></script>
+        <script src="/public/copy.js"></script>
+    </body>
+</html>

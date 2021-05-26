@@ -1,0 +1,37 @@
+<header>
+    <ul>
+        <a href="/" class="button1" id="home">Home</a>
+        <div class="dropdown">
+            <a class="button1 dropdown-btn">Tests</a>
+            <div class="dropdown-items">
+                <a href="/tests" class="button1" id="tests">My Tests</a>
+                <a href="/tests/new" class="button1" id="newtest">New Test</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a class="button1 dropdown-btn">Questions</a>
+            <div class="dropdown-items">
+                <a href="/questions" class="button1" id="questions">My Questions</a>
+                <a href="/questions/new" class="button1" id="newquestions">New Question</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a class="button1 dropdown-btn">Groups</a>
+            <div class="dropdown-items" id="dropdown-items-groups">
+                <a href="/groups" class="button1" id="groups">My Groups</a>
+                <a href="/groups/new" class="button1" id="newgroups">Create a Group</a>
+                <a class="button1" id="joingroup">Join a Group</a>
+                <div class="dropdown-form">
+                    <form class="join-group-form" action="/groups/join/" method="POST" onsubmit="return preSubmit()">
+                        <label for="code">Enter group code:</label>
+                        <input type="text" name="code" required>
+                        <button>Join</button>
+                    </form>
+                </div>
+            </div>
+        </div>    
+    </ul>
+    <hr class="header">
+</header>
+
+<script src="/public/join.js"></script>

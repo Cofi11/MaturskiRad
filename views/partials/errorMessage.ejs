@@ -1,0 +1,13 @@
+<% if (locals.errorMessage != null){ %> 
+    <%= errorMessage  %> 
+    <% } %> 
+
+<!-- express-flash za ovo dole-->
+<% if (messages.error){ %>
+    <div class="error-msg"><%= messages.error  %></div> 
+    <% } %> 
+
+
+<% if (messages.info){ %>
+    <div class="error-msg"><%= messages.info  %></div>
+    <% } %> 
