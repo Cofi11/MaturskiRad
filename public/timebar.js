@@ -80,7 +80,7 @@ else{
     console.log('nema kraja');
 }
 
-async function timer(duration, delay){ //jos srediti ovo
+async function timer(duration, delay){ 
     let progress = document.querySelector('.progress');
     progress.style.animationDuration = duration;
     progress.style.animationPlayState = 'running';

@@ -34,7 +34,7 @@ function initialize(passport){
             return done(null, user);
         }
         catch{
-            return done(null, false);//vljd ovako
+            return done(null, false);
         }
     })
 }

@@ -33,7 +33,7 @@ const questionSchema = new mongoose.Schema({
 questionSchema.pre('remove', function(next){//ne smemo brisati ako se pitanje koristi u nekom testu
     Test.find({questions: this.id}, function(err,tests){
         if(err){
-            next(err); //samo ako nes zabode u DB
+            next(err); //samo ako bude neki problem u DB
         }
         else if(tests.length>0){
             next(new Error('This question is used in at least one test so it cannot be deleted'));

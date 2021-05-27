@@ -582,7 +582,7 @@ function addedQuestions(checkbox){
         questionsCount++;
         let newDiv = document.createElement('div');
         newDiv.className='added-question';
-        newDiv.id='qID-'+checkbox.value; //mzd je glupo al zasad nek stoji ovako; potrebno da posle brisem kad odcekiram
+        newDiv.id='qID-'+checkbox.value;
         let div = document.querySelector('.added-questions');
         div.style.display='flex';
         div.appendChild(newDiv);

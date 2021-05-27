@@ -80,6 +80,8 @@
                                     <textarea readonly class="textarea1 textarea-correct"><%= answers[i-1].string %></textarea>
                                 <% } else {%>
                                     <textarea readonly class="textarea1 textarea-wrong1"><%= answers[i-1].string %></textarea>
+                                    <p>Correct answer(s)</p>
+                                    <textarea readonly class="textarea1"><%=  questions[i-1].answersText.join('; ') %></textarea>
                                 <% } %>  
                             <% } else if(questions[i-1].questionType == 'true-false'){%>
                                 <div class="T-F-letters2">
