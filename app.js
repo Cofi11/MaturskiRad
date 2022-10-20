@@ -7,6 +7,8 @@ const flash = require('express-flash'); //za poruke kroz redirect
 const session = require('express-session');//za odrzavanje ulogovanog usera kroz ceo website
 const port = 3000;
 
+require('dotenv').config()
+
 const initializePassport = require('./passport-config');
 initializePassport(passport);
 
@@ -32,7 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //connect to database
-mongoose.connect('mongodb://localhost:27017/testapp',{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', function(error){
     console.error(error);

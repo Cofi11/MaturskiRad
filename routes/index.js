@@ -9,6 +9,23 @@ const passport = require('passport');
 
 const checkNotAuthenticated = require('../passport-auth').checkNotAuthenticated;
 
+
+const nodemailer = require('nodemailer');
+let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "cofiprobaapp@gmail.com",
+        pass: "nvkokoapdspvtqzm"
+    }
+});
+let mailOptions = {
+    from: 'cofiprobaapp@gmail.com',
+    to: '',
+    subject: 'Account created',
+    text: ''
+  };
+
+
 router.get('/', function(req, res){
     let username;
     if(req.user){
@@ -69,6 +86,15 @@ router.post('/register', checkNotAuthenticated , async function(req,res){
                 await user.save();
                 console.log('Sacuvan user');
                 res.redirect('/');
+                mailOptions.to = user.email;
+                mailOptions.text = `Welcome ${user.username}! You have succesfully created an account!`
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log('Email sent: ' + info.response);
+                    }
+                  });
             }
         } 
         catch{
